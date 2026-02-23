@@ -5,9 +5,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
+import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Advisor {
+public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,11 +17,15 @@ public class Advisor {
     @Column(nullable = false)
     private String name;
 
-    protected Advisor() {
+    @ManyToOne
+    private Advisor advisor;
+
+    protected Client() {
     }
 
-    public Advisor(String name) {
+    public Client(String name, Advisor advisor) {
         this.name = name;
+        this.advisor = advisor;
     }
 
     public Long getId() {
@@ -33,5 +38,13 @@ public class Advisor {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Advisor getAdvisor() {
+        return advisor;
+    }
+
+    public void setAdvisor(Advisor advisor) {
+        this.advisor = advisor;
     }
 }
